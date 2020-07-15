@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var djangoData = {{ data|safe }};
+
+            var data = google.visualization.arrayToDataTable(djangoData);
+            var options = {
+                legend: {position: 'bottom', alignment: 'center', maxLines: 3},
+                slices: {
+                    0: { color: '#4CAF50' },
+                    1: { color: '#2196F3' },
+                    2: { color: '#F44336' }
+                }
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+        $(window).resize(function(){        //to make chart Responsive
+            drawChart();
+        });
+    </script>
+
+    <div class="container has-text-centered">
+        <div class="column is-6 is-offset-3">
+            <h1 class="title is-2">
+               <a href="{% url 'index'}">analysis</a>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 m12 l12" >
+            <div id="piechart" style="width: 100%; min-height: 450px;">{{data|safe}}</div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="column is-8 is-offset-2">
+            <div class="level-rigth">
+                <small class="level-item" style="color: var(--textLight)">
+                    &copy; final semester project for thesis.
+                </small>
+            </div>
+        </div>
+    </footer>
+</body>
+{% endblock %}

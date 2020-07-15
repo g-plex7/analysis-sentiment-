@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+<div class="hero-body">
+    <div class="container has-text-centered">
+        <div class="column is-6 is-offset-3">
+            <h1 class="title is-2">
+                hashtag analysis
+            </h1>
+            <div class="box">
+                <form method="get" action="{% url 'analyse' %} ">
+                    <div class="field is-grouped">
+                        <p class="control is-expanded">
+                           {{ input_hastag.q }}
+                        </p>
+                        <p class="control">
+                            <button class="button is-info" type="submit">
+                                <i class="button is-info right">analysis</i>
+                            </button>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<footer>
+    <div class="column is-8 is-offset-2">
+        <div class="level-rigth">
+            <small class="level-item" style="color: var(--textLight)">
+                &copy; final semester project for thesis.
+            </small>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
